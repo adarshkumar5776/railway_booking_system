@@ -128,6 +128,34 @@ PostgreSQL is used with the following configuration:
 - `409 Conflict`: Concurrent booking operation failed.
 - Detailed error messages provide guidance on how to resolve issues.
 
+### Models
+
+#### Train Model
+
+The `Train` model represents a train in the system. It includes the following fields:
+
+- `train_number`: An integer field representing the unique number assigned to the train.
+- `source`: A character field indicating the origin station of the train journey.
+- `destination`: A character field indicating the destination station of the train journey.
+- `total_seats`: An integer field representing the total number of seats available on the train.
+- `create_time`: A DateTime field automatically capturing the date and time when the train record was created.
+- `update_time`: A DateTime field automatically capturing the date and time when the train record was last updated.
+
+This model is used to manage information about trains, including their identification, origin, destination, total available seats, and timestamps for creation and updates.
+
+#### Booking Model
+
+The `Booking` model represents a booking made by a user for a specific train in the system. It includes the following fields:
+
+- `user`: A foreign key field linking to the `User` model, representing the user who made the booking.
+- `train`: A foreign key field linking to the `Train` model, representing the train for which the booking is made.
+- `seat_count`: An integer field representing the number of seats booked by the user for the train.
+- `create_time`: A DateTime field automatically capturing the date and time when the booking record was created.
+- `update_time`: A DateTime field automatically capturing the date and time when the booking record was last updated.
+
+This model is used to manage information about bookings made by users, including details such as the user who made the booking, the train for which the booking is made, the number of seats booked, and timestamps for creation and updates.
+
+
 ### Note on Race Condition Handling
 
 The `book_seat` function employs database transactions and row-level locking to address the race condition issue. Here's how it works:
